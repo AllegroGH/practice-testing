@@ -5,7 +5,6 @@ import readlineSync from 'readline-sync';
 const f = async () => {
   let exit = 0;
   const promise = new Promise((resolve, reject) => {
-    // setTimeout(() => resolve('готово!'), 1000);
     const timerID = setInterval(() => {
       console.log('timer');
       exit += 1;
@@ -21,11 +20,13 @@ const f = async () => {
 };
 
 const foo = async () => {
-  const result = f();
-  return await result;
+  const wait = f();
+  return await wait;
 };
-// const fooo = foo();
-// await fooo;
-// console.log('sd');
 
-export { foo };
+const wait = f();
+await wait;
+console.log('after straight code...');
+
+foo();
+console.log('after foo()');
