@@ -1,7 +1,5 @@
-import { promises } from 'node:dns';
 import readline from 'node:readline';
 import readlineSync from 'readline-sync';
-import { foo } from './test2.js';
 
 const myFoo = async () => {
   readline.emitKeypressEvents(process.stdin);
@@ -24,19 +22,21 @@ const myFoo = async () => {
   let exit = 0;
 
   let promise = new Promise((resolve, reject) => {
-    const timerID = setInterval((timerID) => {
+    const timerID = setInterval(() => {
       console.log('timer');
       exit += 1;
       if (exit === 5) {
         clearInterval(timerID);
-        resolve();
+        resolve(true);
       } // process.exit();
     }, 1000);
   });
-  let result = await promise;
+  return await promise;
 };
 
-foo();
+const wait = myFoo();
+await wait;
+
 // const abc = myFoo();
 // await abc;
 
